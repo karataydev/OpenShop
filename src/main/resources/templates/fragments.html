@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:fragment="html_head">
+  <meta charset="UTF-8">
+  <title>OpenShop</title>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+  <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+  <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+  <link th:rel="stylesheet" th:href="@{/css/fragment.css}"></link>
+</head>
+<body>
+  <div th:fragment="nav_bar">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/}">
+          <span class="text-success h4">Open</span>Shop
+        </a>
+        <div class="flex-grow-1 d-flex col-8 col-lg-6 mr-auto">
+          <form class="form-inline flex-nowrap bg-dark rounded p-1 w-100" action="#" th:action="@{/search}"  method="get">
+            <input class="form-control w-100" type="search" name="keyword" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        <a class="nav-link text-light" th:href="@{/login}" sec:authorize="isAnonymous()">Login</a>
+        <a class="nav-link text-light" th:href="@{/register}" sec:authorize="isAnonymous()">Register</a>
+
+        <li class="nav-item text-light dropdown list-unstyled" sec:authorize="isAuthenticated()">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello <span th:text="${#authentication.getPrincipal().getUser().getFirstName()}"></span>
+          </a>
+          <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-light" th:href="@{/profile}">Profile</a>
+            <a class="dropdown-item text-light" th:href="@{/my-orders}">My Orders</a>
+            <div class="dropdown-divider text-light"></div>
+            <a class="dropdown-item text-light" th:href="@{/logout}">Logout</a>
+          </div>
+        </li>
+        <a class="nav-link text-light" sec:authorize="isAuthenticated()" th:href="@{/cart}"><i class="fas fa-shopping-cart"></i></a>
+
+      </div>
+    </nav>
+  </div>
+
+</body>
+</html>

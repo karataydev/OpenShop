@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head"></head>
+<body>
+
+<div th:replace="fragments::nav_bar"></div>
+<div class="container">
+    <div class="row">
+        <div class="card col-12 col-md-6 p-4 mt-5">
+            <div class="card-body">
+                <h1>Edit Addresses</h1>
+                <p class="text-muted">Add address to use it when ordering.</p>
+                <form action="#" th:action="@{/add-address}"  method="POST">
+                    <div class="input-group mb-3">
+                        <span class="input-group-prepend "><input type="text" name="name" class="form-control input-group-text p-0" placeholder="Address Name"></span>
+                        <textarea class="form-control" name="address" rows="3"></textarea>
+                    </div>
+                    <button type="submit" value="Submit" class="btn btn-success px-4">Add</button>
+                </form>
+                <p class="text-muted mt-5">Delete Addresses.</p>
+                <form action="#" th:action="@{/delete-address}"  method="POST" th:each="address: ${user.address}">
+                    <div class="input-group mb-3">
+                        <input name="id" class="form-control" type="hidden" th:value="${address.id}">
+                        <span class="input-group-prepend "><input class="form-control input-group-text p-0" th:readonly="true" th:value="${address.name}"></span>
+                        <textarea class="form-control" rows="3" th:readonly="true" th:text="${address.address}"></textarea>
+                        <button class="btn btn-dark px-1" type="submit"><i class="fas fa-trash"></i></button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+
+        <div class="card col-12 col-md-6 p-4 mt-5">
+            <form action="#" th:action="@{/update-user}" th:object="${registerForm}"  method="POST">
+                <div class="card-body">
+                    <h1>Change Details</h1>
+                    <p class="text-muted">Please only change the content you want to change.</p>
+                    <div class="input-group mb-3">
+                        <span class="input-group-prepend "><i class="input-group-text fa fa-user p-2"></i></span>
+                        <input type="text" name="firstName" class="form-control" placeholder="Firstname" th:value="${user.firstName}">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-prepend "><i class="input-group-text fa fa-user p-2"></i></span>
+                        <input type="text" name="lastName" class="form-control" placeholder="LastName" th:value="${user.lastName}">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-prepend "><i class="input-group-text fa fa-envelope p-2"></i></span>
+                        <input type="email" name="email" class="form-control" placeholder="Email" th:value="${user.email}">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-prepend "><i class="input-group-text fa fa-user p-2"></i></span>
+                        <input type="text" name="username" class="form-control" placeholder="Username" th:value="${user.username}">
+                    </div>
+                    <div class="input-group mb-4">
+                        <span class="input-group-prepend"><i class="input-group-text input-group-text fa fa-lock p-2"></i></span>
+                        <input type="password" name="password" class="form-control" placeholder="Password" th:value="${user.password}">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" value="Submit" class="btn btn-success px-4">Change</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

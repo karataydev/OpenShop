@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head"></head>
+<body>
+
+<div th:replace="fragments::nav_bar"></div>
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="card col-12 col-md-3 border-0" th:each="product : ${products}">
+            <a th:href="@{/product/{id}(id = ${product.id})}" class="text-dark" style="text-decoration: none;">
+            <img th:src="${product.pictureUrl}" class="card-img-top mt-5" style="max-height: 132px;" alt="...">
+            <div class="card-body text-center">
+                <h5 class="card-title" th:text="${product.name}"></h5>
+                <h6 class="card-text">$<span th:text="${product.price}"></span></h6>
+            </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

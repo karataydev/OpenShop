@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head"></head>
+<body>
+
+<div th:replace="fragments::nav_bar"></div>
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12 col-md-7">
+      <div class="border-success border-bottom" th:each="order : ${orders}" style="width: 100%">
+        <div class="justify-content-between mt-3 form-inline" th:each="productPair : ${order.cart.productPairs}">
+          <img th:src="${productPair.product.pictureUrl.get(0)}" style="width: 50px;">
+          <p><span th:text="${productPair.quantity}"></span>x <span th:text="${productPair.product.name}"></span></p>
+
+
+        </div>
+        <h6 class="align-content-end text-right">TOTAL: $<span th:text="${order.cart.price}"></span></h6>
+        <p class="align-content-end text-right">Address: <span th:text="${order.address.address}"></span></p>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
